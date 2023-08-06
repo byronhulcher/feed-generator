@@ -1,6 +1,6 @@
 import { QueryParams } from '../lexicon/types/app/bsky/feed/getFeedSkeleton'
 import { AppContext } from '../config'
-import { filteredFeed, generatedFeed } from '../lyrics'
+import { filteredFeed } from '../lyrics'
 
 // max 15 chars
 export const shortname = 'all-star'
