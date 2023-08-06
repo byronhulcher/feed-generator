@@ -7,11 +7,9 @@ import { AtUri } from '@atproto/uri'
 
 export default function (server: Server, ctx: AppContext) {
   server.app.bsky.feed.getFeedSkeleton(async ({ params, req }) => {
-    const feedUri = new AtUri(params.feed)
+    const feed = params.feed.startsWith("at:/did") ? "at://did"+params.feed.slice(7,params.feed.length) : params.feed;
+    const feedUri = new AtUri(feed)
     const algo = algos[feedUri.rkey]
-    if (feedUri.hostname.startsWith("at:/did")) {
-      feedUri.hostname = "at://did"+feedUri.hostname.slice(7,feedUri.hostname.length)
-    }
     if (
       feedUri.hostname !== ctx.cfg.publisherDid ||
       feedUri.collection !== 'app.bsky.feed.generator' ||
